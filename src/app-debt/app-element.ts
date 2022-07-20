@@ -1,4 +1,5 @@
 import {createLogger} from '@alwatr/logger';
+import {LocalizeController} from '@shoelace-style/localize/dist/index.js';
 import {LitElement} from 'lit';
 
 import ionicReset from '../stylesheets/ionic.reset';
@@ -14,6 +15,7 @@ type Constructor<ClassType = {}> = new (...args: any[]) => ClassType;
 
 export declare class LoggableMixinInterface extends LitElement {
   protected _logger: Logger;
+  protected _localize: LocalizeController;
 }
 
 export function LoggableMixin<ClassType extends Constructor<LitElement>>(
@@ -21,6 +23,7 @@ export function LoggableMixin<ClassType extends Constructor<LitElement>>(
 ): Constructor<LoggableMixinInterface> & ClassType {
   class LoggableMixinClass extends superClass {
     protected _logger = createLogger(`<${this.tagName.toLowerCase()}>`);
+    protected _localize = new LocalizeController(this);
 
     static styles: CSSResult[] = [ionicReset, reset, ionicTheming, ionicUtilities];
 
