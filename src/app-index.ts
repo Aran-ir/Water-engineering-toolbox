@@ -12,6 +12,7 @@ import {AppElement} from './app-debt/app-element';
 import {mainNavigation} from './config';
 import en from './translation/en';
 import fa from './translation/fa';
+import {registerSw} from './utilities/register-sw';
 
 import './pages/page-home';
 import './pages/page-about';
@@ -113,6 +114,7 @@ export class AppIndex extends AppElement {
     super.connectedCallback();
 
     registerTranslation(en, fa);
+    registerSw();
 
     this._listenerList.push(
         router.signal.addListener(
