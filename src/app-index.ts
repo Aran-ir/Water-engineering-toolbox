@@ -1,5 +1,6 @@
 import {router} from '@alwatr/router';
 import {SignalInterface} from '@alwatr/signal';
+import {registerTranslation} from '@shoelace-style/localize/dist/index.js';
 import {css, html, nothing} from 'lit';
 import {customElement} from 'lit/decorators/custom-element.js';
 
@@ -9,15 +10,15 @@ import 'pwa-helper-components/pwa-update-available.js';
 
 import {AppElement} from './app-debt/app-element';
 import {mainNavigation} from './config';
+import en from './translation/en';
+import fa from './translation/fa';
 
 import './pages/page-home';
-import './pages/page-game';
 import './pages/page-about';
 
 import type {RoutesConfig} from '@alwatr/router';
 import type {ListenerInterface} from '@alwatr/signal';
 import type {TemplateResult, CSSResult} from 'lit';
-
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -93,17 +94,25 @@ export class AppIndex extends AppElement {
     // TODO: ability to redirect!
     map: (route) => (this._activePage = route.sectionList[0]?.toString().trim() || 'home'),
     list: {
-      home: {
+      'home': {
         render: () => html`<page-home class="ion-page"></page-home>`,
       },
-      about: {
+      'about': {
         render: () => html`<page-about class="ion-page"></page-about>`,
+      },
+      'flow-rate-calculator-gunya-method': {
+        render: () => {
+          import('./pages/flow-rate-calculator-gunya-method.js');
+          return html`<flow-rate-calculator-gunya-method></flow-rate-calculator-gunya-method>`;
+        },
       },
     },
   };
 
   override connectedCallback(): void {
     super.connectedCallback();
+
+    registerTranslation(en, fa);
 
     this._listenerList.push(
         router.signal.addListener(
