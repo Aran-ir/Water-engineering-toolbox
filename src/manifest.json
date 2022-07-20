@@ -1,7 +1,6 @@
 {
-  "short_name": "Spy",
-  "name": "Spy Game",
-  "description": "A Spy Progressive Web Application",
+  "short_name": "Engineering ToolBox",
+  "name": "Water Engineering ToolBox",
   "scope": "/",
   "start_url": "/",
   "display": "standalone",
